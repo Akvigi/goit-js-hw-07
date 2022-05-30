@@ -9,36 +9,23 @@ galleryList.insertAdjacentHTML("beforeend", listItems);
 function eventImg(e) {
     e.preventDefault()
     const { target: itemImg } = e;
-    // if (e.target.nodeName !== "IMG") {
-    //     return
-    //  }
-    if (itemImg.dataset.source) {
+    if (e.target.nodeName !== "IMG") {
+        return
+     }
         const instance = basicLightbox.create(`
-            <div class="modal">
-                <img src=${itemImg.dataset.source}>
-            </div>`
-        ).show()
-        // }
-        // const instance = basicLightbox.create(`
-        //         <div class="modal">
-        //             <img src=${itemImg.dataset.source}>
-        //         </div>`,
-        //     { closable: true, onShow: () => { addEventListener("keydown", pressEsc) }, onClose: () => { pressEsc(e) } }
-        // ).show()
-        // function pressEsc (e) {
-        // if (e.code === "Escape") {
-        //         instance.close();
-        //     }
-        // }
-        // document.addEventListener("keydown", pressEsc)
+                <div class="modal">
+                    <img src=${itemImg.dataset.source}>
+                </div>`,
+        )
+        instance.show()
+        function pressEsc (e) {
+        if (e.key === "Escape") {
+                instance.close();
+            }
+        }
+        document.addEventListener("keydown", pressEsc)
     }
-    
-    // function pressEsc (e) {
-    //     const openedM = document.querySelector(".modal")
-    //     if (e.code === "Escape") {
-    //         instance.close();
-    //   }
-}
+
 galleryList.addEventListener("click", eventImg)
-// document.addEventListener("keydown", pressEsc)
+
 console.log(galleryItems);
